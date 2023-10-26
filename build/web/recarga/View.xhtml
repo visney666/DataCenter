@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecargaViewDlg" widgetVar="RecargaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewRecargaTitle}">
+            <h:form id="RecargaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recargaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewRecargaLabel_recargaPK_idRecarga}"/>
+                        <h:outputText value="#{recargaController.selected.recargaPK.idRecarga}" title="#{bundle.ViewRecargaTitle_recargaPK_idRecarga}"/>
+                        <h:outputText value="#{bundle.ViewRecargaLabel_valor}"/>
+                        <h:outputText value="#{recargaController.selected.valor}" title="#{bundle.ViewRecargaTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewRecargaLabel_operador}"/>
+                        <h:outputText value="#{recargaController.selected.operador}" title="#{bundle.ViewRecargaTitle_operador}"/>
+                        <h:outputText value="#{bundle.ViewRecargaLabel_vendedor}"/>
+                        <h:outputText value="#{recargaController.selected.vendedor}" title="#{bundle.ViewRecargaTitle_vendedor}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="RecargaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

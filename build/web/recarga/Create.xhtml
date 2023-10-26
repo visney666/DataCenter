@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RecargaCreateDlg" widgetVar="RecargaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRecargaTitle}">
+            <h:form id="RecargaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{recargaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRecargaLabel_recargaPK_idRecarga}" for="recargaPK_idRecarga" />
+                        <p:inputText id="recargaPK_idRecarga" value="#{recargaController.selected.recargaPK.idRecarga}" title="#{bundle.CreateRecargaTitle_recargaPK_idRecarga}" required="false" requiredMessage="#{bundle.CreateRecargaRequiredMessage_recargaPK_idRecarga}"/>
+                        <p:outputLabel value="#{bundle.CreateRecargaLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{recargaController.selected.valor}" title="#{bundle.CreateRecargaTitle_valor}" required="true" requiredMessage="#{bundle.CreateRecargaRequiredMessage_valor}"/>
+                        <p:outputLabel value="#{bundle.CreateRecargaLabel_operador}" for="operador" />
+                        <p:selectOneMenu id="operador" value="#{recargaController.selected.operador}" required="true" requiredMessage="#{bundle.EditRecargaRequiredMessage_operador}">
+                            <f:selectItems value="#{operadorController.itemsAvailableSelectOne}"
+                                           var="operadorItem"
+                                           itemLabel="#{operadorItem.nombre}"
+                                           itemValue="#{operadorItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateRecargaLabel_vendedor}" for="vendedor" />
+                        <p:selectOneMenu id="vendedor" value="#{recargaController.selected.vendedor}" required="true" requiredMessage="#{bundle.EditRecargaRequiredMessage_vendedor}">
+                            <f:selectItems value="#{vendedorController.itemsAvailableSelectOne}"
+                                           var="vendedorItem"
+                                           itemLabel="#{vendedorItem.nombre}"
+                                           itemValue="#{vendedorItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{recargaController.create}" value="#{bundle.Save}" update="display,:RecargaListForm:datalist,:growl" oncomplete="handleSubmit(args,'RecargaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RecargaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
